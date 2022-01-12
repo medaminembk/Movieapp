@@ -24,15 +24,24 @@ const MovieList = () => {
         }
     ]
     const [data, setData] = useState(initialState)
-    const [title, setTitle] = useState(initialState)
-    const [description, setDescription] = useState(initialState)
-    const [posterURL, setPosterURL] = useState(initialState)
-    const [rating, setRating] = useState(initialState)
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
+    const [posterURL, setPosterURL] = useState("")
+    const [rating, setRating] = useState("")
    
     function onChange (e){
         setTitle( e.target.value)
     }
-
+    function addmovie(){
+        //setData()
+        
+        setData([...data, {
+            title: title,
+            description: description,
+            posterURL: posterURL,
+            rating: rating
+        }]);
+    }
     const styletitle = {
         fontSize: "28px",
         fontWeight: "700",
@@ -63,26 +72,27 @@ const MovieList = () => {
             <Row>
                 <div style={displaystyle}>
                     <label style={styletitle2}>Description :</label>
-                    <Input placeholder="Basic usage"  onChange={onChange}/>
+                    <Input placeholder="Basic usage"  onChange={(e)=>setDescription( e.target.value)}/>
                 </div>
 
             </Row>
             <Row>
                 <div style={displaystyle}>
                     <label style={styletitle2}>Poste url :</label>
-                    <Input placeholder="Basic usage" onChange={onChange} />
+                    <Input placeholder="Basic usage" onChange={(e)=>setPosterURL( e.target.value)} />
                 </div>
 
             </Row>
             <Row>
                 <div style={displaystyle}>
                     <label style={styletitle2}>Rating :</label>
-                    <Input placeholder="Basic usage" onChange={onChange} />
+                    <Input placeholder="Basic usage" onChange={(e)=>setRating( e.target.value)} />
                 </div>
 
             </Row>
             <Row justify='center'>
-                <Button style={{ color: "white", backgroundColor: "#000B49", fontSize: "18px", margin: "4px" }}>
+                <Button style={{ color: "white", backgroundColor: "#000B49", fontSize: "18px", margin: "4px" }}
+                onClick={addmovie}>
                     Ajouter
                 </Button>
             </Row>
