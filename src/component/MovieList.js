@@ -1,5 +1,6 @@
-import { Button, Input, Row, } from 'antd'
+import { Button, Input, Row, Col } from 'antd'
 import React, { useState } from 'react'
+import Filter from './Filter'
 import MovieCard from './MovieCard'
 
 const MovieList = () => {
@@ -28,13 +29,13 @@ const MovieList = () => {
     const [description, setDescription] = useState("")
     const [posterURL, setPosterURL] = useState("")
     const [rating, setRating] = useState("")
-   
-    function onChange (e){
-        setTitle( e.target.value)
+
+    function onChange(e) {
+        setTitle(e.target.value)
     }
-    function addmovie(){
+    function addmovie() {
         //setData()
-        
+
         setData([...data, {
             title: title,
             description: description,
@@ -62,43 +63,55 @@ const MovieList = () => {
             <Row >
                 <label style={styletitle}>Add Movie</label>
             </Row>
-            <Row justify='start'>
-                <div style={displaystyle}>
-                    <label style={styletitle2}>Title :</label>
-                    <Input placeholder="Basic usage" onChange={onChange} />
-                </div>
-
-            </Row>
             <Row>
-                <div style={displaystyle}>
-                    <label style={styletitle2}>Description :</label>
-                    <Input placeholder="Basic usage"  onChange={(e)=>setDescription( e.target.value)}/>
-                </div>
+                <Col span={12} >
+                    <Row justify='center'>
+                        <div style={displaystyle}>
+                            <label style={styletitle2}>Title :</label>
+                            <Input placeholder="Basic usage" onChange={onChange} />
+                        </div>
 
-            </Row>
-            <Row>
-                <div style={displaystyle}>
-                    <label style={styletitle2}>Poste url :</label>
-                    <Input placeholder="Basic usage" onChange={(e)=>setPosterURL( e.target.value)} />
-                </div>
+                    </Row>
+                    <Row justify='center'>
+                        <div style={displaystyle}>
+                            <label style={styletitle2}>Description :</label>
+                            <Input placeholder="Basic usage" onChange={(e) => setDescription(e.target.value)} />
+                        </div>
 
-            </Row>
-            <Row>
-                <div style={displaystyle}>
-                    <label style={styletitle2}>Rating :</label>
-                    <Input placeholder="Basic usage" onChange={(e)=>setRating( e.target.value)} />
-                </div>
+                    </Row>
+                </Col>
 
+                <Col span={12}>
+                    <Row justify='center'>
+                        <div style={displaystyle}>
+                            <label style={styletitle2}>Poste url :</label>
+                            <Input placeholder="Basic usage" onChange={(e) => setPosterURL(e.target.value)} />
+                        </div>
+
+                    </Row>
+                    <Row justify='center'>
+                        <div style={displaystyle}>
+                            <label style={styletitle2}>Rating :</label>
+                            <Input placeholder="Basic usage" onChange={(e) => setRating(e.target.value)} />
+                        </div>
+
+                    </Row>
+                </Col>
             </Row>
+
+
             <Row justify='center'>
                 <Button style={{ color: "white", backgroundColor: "#000B49", fontSize: "18px", margin: "4px" }}
-                onClick={addmovie}>
+                    onClick={addmovie}>
                     Ajouter
                 </Button>
             </Row>
 
             <Row>
                 <label style={styletitle}>List Movie</label>
+            </Row>
+            <Row style={{ margin: "20px" }}>
+                <Filter />
             </Row>
             <Row>
                 {data.map((item, key) => {
