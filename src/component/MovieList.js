@@ -111,7 +111,7 @@ const MovieList = () => {
                 <label style={styletitle}>List Movie</label>
             </Row>
             <Row style={{ margin: "20px" }}>
-                <Filter />
+                <Filter title='title' rate='rate'/>
             </Row>
             <Row>
                 {data.map((item, key) => {
