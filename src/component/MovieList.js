@@ -6,22 +6,26 @@ import MovieCard from './MovieCard'
 const MovieList = () => {
     const initialState = [
         {
-            title: "Europe Street beat",
-            description: 'www.instagram.com',
-            posterURL: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
-            rating: 10
+            title: "Avatar 2",
+            description: "Jake Sully et Ney tiri ont formé une famille et font tout pour rester aussi soudés que possible. Ils sont cependant contraints de quitter leur foyer et d explorer les différentes régions encore mystérieuses de Pandora. Lorsqu une ancienne menace refait surface Jake va devoir mener une guerre difficile contre les humains.",
+            posterURL: 'avatar.jpg',
+            rating: 2,
+            trailerLink: 'https://www.youtube.com/embed/EWXb-Twcbi4'
+           
         },
         {
-            title: "Europe Street beat",
-            description: 'www.instagram.com',
-            posterURL: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
-            rating: 10
+            title: "Morbius",
+            description: 'L ancien biochimiste primé Michael Morbius, souffre d une maladie rare du sang et veut l arrêter par des expériences biochimiques, mais au lieu de cela, il entre en possession d une sorte de vampire surhumain.',
+            posterURL: 'mm.jpg',
+            rating: 9,
+            trailerLink: 'https://www.youtube.com/embed/oZ6iiRrz1SY'
         },
         {
-            title: "Europe Street beat",
-            description: 'www.instagram.com',
-            posterURL: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
-            rating: 10
+            title: "Uncharted",
+            description: 'Uncharted est un film américain réalisé par Ruben Fleischer et dont la sortie est prévue en 2022. Il s agit d une adaptation cinématographique de la série de jeux vidéo Uncharted développés par Naughty Dog et édités par Sony Interactive Entertainment.',
+            posterURL: 'uncharted.jpg',
+            rating: 10,
+            trailerLink: 'https://www.youtube.com/embed/4wCH1K-ckZw'
         }
     ]
     const [data, setData] = useState(initialState)
@@ -33,6 +37,42 @@ const MovieList = () => {
     function onChange(e) {
         setTitle(e.target.value)
     }
+
+    function filterrating(e) {
+        console.log(e.target.value);
+        let newarray=[]
+        initialState.map((item, key)=>{
+            console.log(item.rating);
+            console.log(e.target.value);
+            if(e.target.value == "All"){
+              
+                newarray.push(item)
+            }
+            else if(item.rating == e.target.value){
+                console.log('equal');
+                newarray.push(item)
+            }
+        })
+        setData(newarray)
+    }
+    function filtertitle(e) {
+        console.log(e.target.value);
+        let newarray=[]
+        initialState.map((item, key)=>{
+            console.log(item.rating);
+            console.log(e.target.value);
+            if(e.target.value == "All"){
+              
+                newarray.push(item)
+            }
+            else if(item.title == e.target.value){
+                console.log('equal');
+                newarray.push(item)
+            }
+        })
+        setData(newarray)
+    }
+    
     function addmovie() {
         //setData()
 
@@ -111,12 +151,12 @@ const MovieList = () => {
                 <label style={styletitle}>List Movie</label>
             </Row>
             <Row style={{ margin: "20px" }}>
-                <Filter title='title' rate='rate'/>
+                <Filter title='title' rate='rate' filterrating={filterrating} filtertitle={filtertitle}/>
             </Row>
             <Row>
                 {data.map((item, key) => {
                     return <MovieCard title={item.title} description={item.description}
-                        posterURL={item.posterURL} rating={item.rating} key={key} />
+                        posterURL={item.posterURL} rating={item.rating} key={key} link={item.trailerLink} />
                 })}
             </Row>
 
